@@ -1,3 +1,8 @@
+Tämän hetkisessä keskustelusovelluksen versiossa on mahdollista aloittaa uusia viestiketjuja ja vastata niihin. Tietokannassa on 2 taulua, yksi ketjujen aloituksille ja toinen ketjujen vastauksille.
+
+
+Lopullisessa sovelluksessa:
+
 Sovelluksessa näkyy keskustelualueita, joista jokaisella on tietty aihe. Alueilla on keskusteluketjuja, jotka muodostuvat viesteistä. Jokainen käyttäjä on peruskäyttäjä tai ylläpitäjä.
 
 Sovelluksen ominaisuuksia:
