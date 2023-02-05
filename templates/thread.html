@@ -1,0 +1,11 @@
+<h2>{{ topic }}</h2>
+<hr>
+{{ message }}
+<hr>
+<h3>Vastaukset:</h3>
+{% for answer in answers %}
+<b>Lähetetty: {{ answer.sent_at.strftime("%Y-%m-%d %H:%M:%S") }}</b> <br>
+{{ answer.answer }}
+<hr>
+{% endfor %}
+<a href="/">Takaisin</a> | <a href="/reply/{{ id }}")>Vastaa ketjuun</a>

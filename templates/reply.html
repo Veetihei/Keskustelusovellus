@@ -1,0 +1,12 @@
+{{ topic }}
+<hr>
+<form action="/answer" method="POST">
+    {{ id }}
+<p>Vastaus:<br>
+    <input type="text" name="message"></p>
+<p>
+<input type="submit" value="Vastaa">
+<input type="hidden" name="id" value="{{ id }}">
+</form>
+<hr>
+<a href="/">Takaisin</a>
