@@ -10,19 +10,18 @@
     <input type="text" name="password"></p>
     <input type="submit" value="kirjaudu">
 </form>
-<form action="/register">
-    <input type="submit" value="Luo käyttäjätunnus">
-</form>
 {% endif %}
 <form action="/search" method="GET">
     Hakusana: <input type="text" name="query">
     <br>
-    <input type="submit" value="Etsi">
+    <input type="submit" value="Lähetä">
 </form>
 <hr>
+<p>Hakusana: {{ query }}</p>
 {% for thread in threads %}
 Aihe: {{ thread.topic }} <br>
 Luotu: {{ thread.created_at.strftime("%Y-%m-%d %H:%M:%S") }} <br>
 <a href="/thread/{{ thread.id }}">Näytä ketju</a><br>
 <hr>
 {% endfor %}
+<a href="/">Palaa etusivulle</a>
