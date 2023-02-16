@@ -1,7 +1,9 @@
-<form action="/create" method="POST">
+<p>Luo uusi ketju alueelle: <b>{{ section.name }}</b></p>
+<form action="/create/{{ section.id }}" method="POST">
     <p>Aihe:<br>
     <input type="text" name="topic"></p>
-    <p>Viesti:<br>
-    <input type="text" name="message"></p>
+    <p>Viesti:</p>
+    <textarea name="message" rows="3" cols="40"></textarea>
+    <input type="hidden" name="section" value="{{ section.id }}">
     <input type="submit" value="Luo ketju">
 </form>

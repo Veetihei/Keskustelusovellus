@@ -1,11 +1,24 @@
-<h2>{{ topic }}</h2>
+<h2>{{ thread.topic }}</h2>
+<p>{{ thread.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</p>
+<p>Lähettäjä: {{ thread.username }}</p>
 <hr>
-{{ message }}
+{{ thread.message }}
 <hr>
 <h3>Vastaukset:</h3>
 {% for answer in answers %}
 <b>Lähetetty: {{ answer.sent_at.strftime("%Y-%m-%d %H:%M:%S") }}</b> <br>
+<p>Lähettäjä: {{ answer.username }}</p>
 {{ answer.answer }}
 <hr>
 {% endfor %}
+<hr>
+{% if session.role == 1 or session.role == 2 %}
+<h4>Vastaa ketjuun</h4>
+<p>Kerjun id on {{ thread.id }}</p>
+<form action="/answer/{{ thread.id }}" method="POST">
+    <textarea name="message" rows="2" cols="40"></textarea>
+    <input type="hidden" name="thread" value="{{ thread.id}}">
+    <input type="submit" value="Vastaa ketjuun">
+</form>
+{% endif %}
 <a href="/">Takaisin</a> | <a href="/reply/{{ id }}")>Vastaa ketjuun</a>

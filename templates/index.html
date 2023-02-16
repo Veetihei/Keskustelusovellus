@@ -1,13 +1,12 @@
 {% if session.username %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 <a href="/logout">Kirjaudu ulos</a>
-<a href="/new">Uusi ketju</a>
 {% else %}
 <form action="/login" method="POST">
     <p>Tunnus:<br>
     <input type="text" name="username"></p>
     <p>Salasana:<br>
-    <input type="text" name="password"></p>
+    <input type="password" name="password"></p>
     <input type="submit" value="kirjaudu">
 </form>
 <form action="/register">
@@ -20,9 +19,8 @@
     <input type="submit" value="Etsi">
 </form>
 <hr>
-{% for thread in threads %}
-Aihe: {{ thread.topic }} <br>
-Luotu: {{ thread.created_at.strftime("%Y-%m-%d %H:%M:%S") }} <br>
-<a href="/thread/{{ thread.id }}">Näytä ketju</a><br>
+<h4>Aihealueet:</h4>
+{% for section in sections %}
+<a href="/section/{{ section.id }}"> {{ section.name }} </a><br>
 <hr>
 {% endfor %}
