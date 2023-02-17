@@ -4,12 +4,7 @@ from sqlalchemy import text
 import users
 
 def get_sections():
-    role = users.get_role()
-    print("KÄYTTÄJÄN ROOLI ON: --", role)
-    if role == 2:
-        sql = text("SELECT name, id FROM sections ORDER BY name")
-    else:
-        sql = text("SELECT name, id FROM sections WHERE access = 1 ORDER BY name")
+    sql = text("SELECT name, id, access FROM sections ORDER BY name")
     result = db.session.execute(sql)
     sections = result.fetchall()
     return sections
@@ -19,3 +14,18 @@ def get_section(id):
     result = db.session.execute(sql, {"id":id})
     section = result.fetchone()
     return section
+
+#EI KÄYTETÄ
+def add_section(name, access):
+    sql = text("INSERT INTO sections (name, access) VALUES (:name, :access)")
+    db.session.execute(sql, {"name":name, "access":access})
+    db.session.commit()
+    return True
+
+def remove_section(id):
+    if users.get_role() == 2:
+        sql = text("UPDATE sections SET access=0 WHERE id=:id")
+        db.session.execute(sql, {"id":id})
+        db.session.commit()
+        return True
+    return False

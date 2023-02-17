@@ -1,6 +1,7 @@
 {% if session.username %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 <a href="/logout">Kirjaudu ulos</a>
+<br>
 {% else %}
 <form action="/login" method="POST">
     <p>Tunnus:<br>
@@ -13,14 +14,48 @@
     <input type="submit" value="Luo käyttäjätunnus">
 </form>
 {% endif %}
+<br>
 <form action="/search" method="GET">
     Hakusana: <input type="text" name="query">
     <br>
     <input type="submit" value="Etsi">
 </form>
-<hr>
+<br>
+
+{% if session.role != 2 %}
 <h4>Aihealueet:</h4>
+<hr>
 {% for section in sections %}
+{% if section.access == 1 %}
 <a href="/section/{{ section.id }}"> {{ section.name }} </a><br>
 <hr>
+{% endif %}
 {% endfor %}
+{% endif %}
+
+
+{% if session.role == 2 %}
+<a href="/new_section" method="GET">Luo uusi aihealue</a>
+<h4>Aihealueet:</h4>
+<hr>
+{% for section in sections %}
+{% if section.access == 1 %}
+<a href="/section/{{ section.id }}"> {{ section.name }} </a><br>
+<form action="remove_section/{{ section.id }}" method="POST">
+    <input type="submit" value="Poista aihealue ja kaikki sen viestit">
+</form>
+<hr>
+{% endif %}
+{% endfor %}
+
+<h4>ADMIN ALUEET</h4><hr>
+{% for section in sections %}
+{% if section.access == 2 %}
+<a href="/section/{{ section.id }}"> {{ section.name }} </a><br>
+<form action="remove_section/{{ section.id }}" method="POST">
+    <input type="submit" value="Poista aihealue ja kaikki sen viestit">
+</form>
+<hr>
+{% endif %}
+{% endfor %}
+{% endif%}

@@ -18,7 +18,7 @@ CREATE TABLE threads (
     message TEXT,
     user_id INTEGER REFERENCES users,
     section_id INTEGER REFERENCES sections,
-    visible BOOLEAN DEFAULT TRUE
+    visible INTEGER DEFAULT 1
 );
 
 CREATE TABLE answers (
@@ -27,7 +27,7 @@ CREATE TABLE answers (
     sent_at TIMESTAMP,
     answer TEXT,
     user_id INTEGER REFERENCES users,
-    visible BOOLEAN DEFAULT TRUE
+    visible INTEGER DEFAULT 1
 );
 
 

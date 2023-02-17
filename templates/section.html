@@ -6,9 +6,13 @@
 <h3>Aihealueen ketjut:</h3>
 <hr>
 {% for thread in threads %}
+{{ session.visible }}
+{% if thread.visible == 1 %}
 <a href="/thread/{{ thread.id }}">Aihe: {{ thread.topic }}</a><br>
 <b>Luotu: {{ thread.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</b> <br>
 <p>Lähettäjä: {{ thread.username }}</p>
+<!---KESKEN VIELÄ-->
 <hr>
+{% endif %}
 {% endfor %}
 <a href="/">Takaisin Etusivulle</a>

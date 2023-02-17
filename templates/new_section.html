@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 
-<p>Luo uusi ketju alueelle: <b>{{ section.name }}</b></p>
-<form action="/create/{{ section.id }}" method="POST" onsubmit="return check(this)">
-    <p>Aihe:<br>
+<p>Luo uusi aihealue:</p>
+<form action="/new_section" method="POST" onsubmit="return check(this)">
+    <p>Aihealueen nimi:<br>
     <input type="text" name="topic"></p>
-    <p>Viesti:</p>
-    <textarea name="message" rows="3" cols="40"></textarea>
-    <input type="hidden" name="section" value="{{ section.id }}">
-    <input type="submit" value="Luo ketju">
+    <select name="access">
+        <option value=1> Kaikille
+        <option value=2> Admineille
+    </select>
+    <input type="submit" value="Luo Aihealue">
 </form>
 
 <script>

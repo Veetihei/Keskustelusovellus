@@ -2,6 +2,7 @@ from db import db
 from sqlalchemy import text
 from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
+import secrets
 
 def login(username, password):
     sql = text("SELECT id, username, password, role FROM users WHERE username=:username")
@@ -14,6 +15,7 @@ def login(username, password):
             session["username"] = user.username
             session["role"] = user.role
             session["user_id"] = user.id
+            session["csrf_token"] = secrets.token_hex(16) #EI VIELÄ KÄYTÖSSÄ
             return True
         else:
             return False
