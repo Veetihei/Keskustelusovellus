@@ -44,10 +44,10 @@ def search(query):
     role = users.get_role()
     if role == 2:
         sql = text("SELECT T.topic, T.id, T.created_at, U.username FROM threads T, Users U " \
-            "WHERE T.user_id = U.id AND T.topic like :query")
+            "WHERE T.user_id = U.id AND visible = 1 AND T.topic like :query")
     else:
         sql = text("SELECT T.topic, T.id, T.created_at, U.username FROM threads T, Users U, " \
-            "sections S WHERE T.user_id = U.id AND T.section_id = S.id AND S.access = 1 AND T.topic like :query")
+            "sections S WHERE T.user_id = U.id AND visible = 1 AND T.section_id = S.id AND S.access = 1 AND T.topic like :query")
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     threads = result.fetchall()
     return threads

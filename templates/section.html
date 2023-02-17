@@ -1,18 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}{{ section.name }}{% endblock %}
+{% block content %}
+
+<div class="content">
 <h2>{{ section.name }}</h2>
 {% if session.role == 1 or session.role == 2 %}
-<h4><a href="/new/{{ section.id }}">Luo uusi ketju</a></h4>
+<a href="/new/{{ section.id }}">Luo uusi ketju</a>
 {% endif %}
 <br>
 <h3>Aihealueen ketjut:</h3>
+</div>
+
 <hr>
 {% for thread in threads %}
-{{ session.visible }}
+
 {% if thread.visible == 1 %}
-<a href="/thread/{{ thread.id }}">Aihe: {{ thread.topic }}</a><br>
+<div class="content">
+<a href="/thread/{{ thread.id }}" class="big_link">{{ thread.topic }}</a><br>
 <b>Luotu: {{ thread.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</b> <br>
 <p>Lähettäjä: {{ thread.username }}</p>
 <!---KESKEN VIELÄ-->
-<hr>
+
+</div>
 {% endif %}
 {% endfor %}
-<a href="/">Takaisin Etusivulle</a>
+
+{% endblock %}

@@ -1,9 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Rekisteröidy{% endblock %}
+{% block content %}
+
+<div class="content">
 <h2>Rekisteröidy:</h2>
 
 <form action="/register" method="POST">
-    Tunnus: <br><input type="text" name="username" minlength="3" maxlength="20"> 
     <p>Tunnuksen on oltava 3-20 merkkiä pitkä</p>
+    Tunnus: <br><input type="text" name="username" minlength="3" maxlength="20"> 
     <p>
+    <p>Salasanan on oltava 5-20 merkkiä pitkä</p>
     Salasana: <br><input type="password" name="password1" minlength="5" maxlength="20">
     <p>
     Salasana uudestaan: <br><input type="password" name="password2">
@@ -16,4 +22,6 @@
     <input type="submit" value="Luo tunnus">
 </form>
 <p>
-<a href="/">Etusivu</a>
+</div>
+
+{% endblock %}

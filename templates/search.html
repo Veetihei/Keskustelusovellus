@@ -1,27 +1,21 @@
-{% if session.username %}
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
-<a href="/logout">Kirjaudu ulos</a>
-<a href="/new">Uusi ketju</a>
-{% else %}
-<form action="/login" method="POST">
-    <p>Tunnus:<br>
-    <input type="text" name="username"></p>
-    <p>Salasana:<br>
-    <input type="text" name="password"></p>
-    <input type="submit" value="kirjaudu">
-</form>
-{% endif %}
-<form action="/search" method="GET">
-    Hakusana: <input type="text" name="query">
-    <br>
-    <input type="submit" value="Lähetä">
-</form>
+{% extends "layout.html" %}
+{% block title %}Haku{% endblock %}
+{% block content %}
+
+
+
+<div class="content">
+<p>Hakusana: <b>{{ query }}</b></p>
 <hr>
-<p>Hakusana: {{ query }}</p>
+{% if not threads %}
+<p>Hakusanallasi ei löytynyt ketjuja</p>
+{% else %}
 {% for thread in threads %}
 Aihe: {{ thread.topic }} <br>
 Luotu: {{ thread.created_at.strftime("%Y-%m-%d %H:%M:%S") }} <br>
 <a href="/thread/{{ thread.id }}">Näytä ketju</a><br>
 <hr>
 {% endfor %}
-<a href="/">Palaa etusivulle</a>
+{% endif %}
+</div>
+{% endblock %}

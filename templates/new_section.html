@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block title %}Uusi aihealue{% endblock %}
+{% block content %}
 
 <p>Luo uusi aihealue:</p>
 <form action="/new_section" method="POST" onsubmit="return check(this)">
@@ -24,3 +26,5 @@ function check(form) {
     return true;
 }
 </script>
+
+{% endblock %}

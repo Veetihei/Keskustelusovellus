@@ -1,2 +1,53 @@
 <!DOCTYPE html>
-<title></title>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Keskustelusovellus - {% block title %}{% endblock %}</title>
+
+<div class="header">
+<h1 id="main_title">Keskustelusovellus</h1>
+
+<div class="login">
+{% if session.username %}
+<p>Olet kirjautunut nimellä: <b>{{ session.username }}</b></p>
+<form action="/logout">
+    <input type="submit" value="Kirjaudu ulos">
+</form>
+<br>
+
+{% else %}
+<p>Kirjaudu sisään kirjoittaaksesi viestejä</p>
+<form action="/login" method="POST">
+    <p>Tunnus:<br>
+    <input type="text" name="username"></p>
+    <p>Salasana:<br>
+    <input type="password" name="password"></p>
+    <input type="submit" value="kirjaudu">
+</form>
+<br>
+<p>Tai luo tunnus!</p>
+<form action="/register">
+    <input type="submit" value="Luo käyttäjätunnus">
+</form>
+{% endif %}
+</div>
+<div id="search">
+<br>
+<form action="/search" method="GET">
+    Hakusana: <input type="text" name="query">
+    <br>
+    <input type="submit" value="Etsi">
+</form>
+</div>
+<br>
+<form action="/instructions" class="button_right_bottom">
+    <input type="submit" value="Ohjeet">
+</form>
+</div>
+<hr>
+{% block content %}{% endblock %}
+<hr>
+<div class="footer">
+    <a href="/">Etusivu</a> | Kiitos vierailusta!
+</div>
+<!---Tänne footer-->

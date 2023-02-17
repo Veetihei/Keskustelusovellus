@@ -1,0 +1,79 @@
+body {
+    margin: auto;
+    max-width: 80em;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    background: lightgray;
+}
+
+.header {
+    position: relative;
+    background: lightblue;
+    font-weight: bold;
+    padding: 1em;
+    font-size: 2em;
+}
+
+#main_title {
+    display: block;
+}
+
+.login {
+    position:absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 16px;
+    display: block;
+}
+
+#search {
+    position:absolute;
+    left: 1em;
+    bottom: 1em;
+    font-size: 1em;
+}
+
+.footer {
+    height: 4em;
+    background: lightblue;
+    position: center;
+    padding: 2em;
+}
+
+.content {
+    position: relative;
+    background: whitesmoke;
+    padding: 1em;
+    margin: 0.5em;
+}
+
+.small_section {
+    position: relative;
+    padding: 1em;
+}
+
+.text_left {
+    position: absolute;
+    left: 1em;
+    top: 1em;
+}
+
+.button_right {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+
+.button_right_bottom {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.big_link {
+    font-size: 26px;
+    margin: 0.3em;
+}

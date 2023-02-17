@@ -38,6 +38,10 @@ def logout():
     users.logout()
     return redirect("/")
 
+@app.route("/instructions")
+def instructions():
+    return render_template("instructions.html")
+
 #TEHTY
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -70,6 +74,7 @@ def register():
 def search():
     query = request.args["query"]
     list = threads.search(query)
+    print(list)
     return render_template("search.html", threads=list, query=query)
 
 #TEHTY

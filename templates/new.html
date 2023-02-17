@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block title %}Uusi ketju{% endblock %}
+{% block content %}
 
 <p>Luo uusi ketju alueelle: <b>{{ section.name }}</b></p>
 <form action="/create/{{ section.id }}" method="POST" onsubmit="return check(this)">
@@ -23,3 +25,5 @@ function check(form) {
     return true;
 }
 </script>
+
+{% endblock %}

@@ -1,61 +1,61 @@
-{% if session.username %}
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
-<a href="/logout">Kirjaudu ulos</a>
-<br>
-{% else %}
-<form action="/login" method="POST">
-    <p>Tunnus:<br>
-    <input type="text" name="username"></p>
-    <p>Salasana:<br>
-    <input type="password" name="password"></p>
-    <input type="submit" value="kirjaudu">
-</form>
-<form action="/register">
-    <input type="submit" value="Luo käyttäjätunnus">
-</form>
-{% endif %}
-<br>
-<form action="/search" method="GET">
-    Hakusana: <input type="text" name="query">
-    <br>
-    <input type="submit" value="Etsi">
-</form>
-<br>
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
+
+<div class="content">
+    <h1>Etusivu</h1>
+    Tervetuloa keskustelemaan!
+    <p>Valitse sopiva aihealue alhaalta. Vain ylläpitäjät voivat lisätä aihealueita, tai poistaa niitä</p>
+    {% if session.role == 2 %}
+        <form action="/new_section" class="button_right">
+            <input type="submit" value="Luo uusi Aihealue">
+        </form>
+    {% endif %}
+</div>
 
 {% if session.role != 2 %}
-<h4>Aihealueet:</h4>
+<div class="content">
+<h2>Aihealueet:</h2>
 <hr>
 {% for section in sections %}
 {% if section.access == 1 %}
-<a href="/section/{{ section.id }}"> {{ section.name }} </a><br>
+<h4><a href="/section/{{ section.id }}"> {{ section.name }} </a></h4><br>
 <hr>
+</div>
 {% endif %}
 {% endfor %}
 {% endif %}
 
 
 {% if session.role == 2 %}
-<a href="/new_section" method="GET">Luo uusi aihealue</a>
-<h4>Aihealueet:</h4>
+<div class="content">
+<h2>Aihealueet:</h2>
 <hr>
 {% for section in sections %}
 {% if section.access == 1 %}
-<a href="/section/{{ section.id }}"> {{ section.name }} </a><br>
-<form action="remove_section/{{ section.id }}" method="POST">
+<div class="small_section">
+<h4><a href="/section/{{ section.id }}" class="text_left"> {{ section.name }} </a></h4><br>
+<form action="remove_section/{{ section.id }}" method="POST" class="button_right">
     <input type="submit" value="Poista aihealue ja kaikki sen viestit">
 </form>
 <hr>
+</div>
 {% endif %}
 {% endfor %}
 
-<h4>ADMIN ALUEET</h4><hr>
+<h2>ADMIN alueet:</h2><hr>
 {% for section in sections %}
 {% if section.access == 2 %}
-<a href="/section/{{ section.id }}"> {{ section.name }} </a><br>
-<form action="remove_section/{{ section.id }}" method="POST">
+<div class="small_section">
+<h4><a href="/section/{{ section.id }}" class="text_left"> {{ section.name }} </a></h4><br>
+<form action="remove_section/{{ section.id }}" method="POST" class="button_right">
     <input type="submit" value="Poista aihealue ja kaikki sen viestit">
 </form>
 <hr>
+</div>
 {% endif %}
 {% endfor %}
+</div>
 {% endif%}
+
+{% endblock %}
