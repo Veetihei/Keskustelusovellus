@@ -91,6 +91,8 @@ def create(id):
     section = request.form["section"]
     if len(topic) > 100:
         return render_template("error.html", message="Otsikko on liian pitkä")
+    if len(topic) < 3:
+        return render_template("error.html", message="Otsikko on liian lyhyt, sen pitää olla vähintään 3 merkkiä")
     if len(message) > 5000:
         return render_template("error.html", message="Viesti on liian pitkä")
     values = threads.create(topic, message, section)

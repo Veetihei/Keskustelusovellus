@@ -18,6 +18,9 @@ function check(form) {
         alert("Otsikko on liian pitkä, sen pitää olla alle 100 merkkiä");
         return false;
     }
+    if (form.topic.value.length < 3) {
+        alert("Otsikko on liian lyhyt, sen pitää olla vähintään 3 merkkiä")
+    }
     if (form.message.value.length > 5000) {
         alert("Viesti on liian pitkä, sen pitää olla alle 5000 merkkiä")
         return false;

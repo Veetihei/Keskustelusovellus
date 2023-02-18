@@ -4,7 +4,7 @@ from sqlalchemy import text
 import users
 
 def get_sections():
-    sql = text("SELECT name, id, access FROM sections ORDER BY name")
+    sql = text("SELECT * FROM sections ORDER BY name")
     result = db.session.execute(sql)
     sections = result.fetchall()
     return sections

@@ -19,11 +19,13 @@
 <hr>
 {% for section in sections %}
 {% if section.access == 1 %}
-<h4><a href="/section/{{ section.id }}"> {{ section.name }} </a></h4><br>
+<div class="small_section">
+<a href="/section/{{ section.id }}"> {{ section.name }} </a><br>
 <hr>
 </div>
 {% endif %}
 {% endfor %}
+</div>
 {% endif %}
 
 
@@ -34,7 +36,7 @@
 {% for section in sections %}
 {% if section.access == 1 %}
 <div class="small_section">
-<h4><a href="/section/{{ section.id }}" class="text_left"> {{ section.name }} </a></h4><br>
+<a href="/section/{{ section.id }}" class="text_left"> {{ section.name }} </a><br>
 <form action="remove_section/{{ section.id }}" method="POST" class="button_right">
     <input type="submit" value="Poista aihealue ja kaikki sen viestit">
 </form>
@@ -47,7 +49,7 @@
 {% for section in sections %}
 {% if section.access == 2 %}
 <div class="small_section">
-<h4><a href="/section/{{ section.id }}" class="text_left"> {{ section.name }} </a></h4><br>
+<a href="/section/{{ section.id }}" class="text_left"> {{ section.name }} </a><br>
 <form action="remove_section/{{ section.id }}" method="POST" class="button_right">
     <input type="submit" value="Poista aihealue ja kaikki sen viestit">
 </form>

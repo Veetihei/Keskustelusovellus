@@ -23,6 +23,7 @@
 {% if answers %}
     {% for answer in answers %}
     <div class="small_section">
+    <div class="answer_meta">
     <b>Lähetetty: {{ answer.sent_at.strftime("%Y-%m-%d %H:%M:%S") }}</b> <br>
     <p><i>Lähettäjä: {{ answer.username }}</i></p>
     {% if session.user_id == answer.user_id or session.role == 2 %}
@@ -30,6 +31,7 @@
         <input type="hidden" name="thread_id" value="{{ thread.id }}">
         <input type="submit" value="Poista vastaus">
     </form>
+    </div>
     <hr>
     {{ answer.answer }}
     {% endif %}

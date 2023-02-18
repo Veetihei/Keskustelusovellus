@@ -65,8 +65,8 @@ body {
 
 .button_right_bottom {
     position: absolute;
-    right: 1em;
-    bottom: 1em;
+    right: 1.5em;
+    bottom: 1.5em;
 }
 
 a:hover {
@@ -76,4 +76,9 @@ a:hover {
 .big_link {
     font-size: 26px;
     margin: 0.3em;
+}
+
+.answer_meta {
+    background: lightgrey;
+    padding: 1em;
 }
