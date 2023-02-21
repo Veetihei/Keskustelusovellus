@@ -1,11 +1,12 @@
 Keskustelusovellus on käytössä osoitteessa https://hajoitustyo-keskustelusovellus.fly.dev/
+Jos sivu ei aukea heti, koita päivittää sivu.
 
 Jos linkki ei toimi, niin sovelluksen saa käynnistettyä paikallisesti lataamalla tämä repositorio ja tekemällä seuraavat asiat:
 
 lisää juuri kansioon tiedosto nimeltä ".env" Ja määritä sen sisältö seuraavanlaiseksi:
 '''
-DATABASE_URL=<tietokannan-paikallinen-osoite>
-SECRET_KEY=<salainen-avain>
+DATABASE_URL=tietokannan-paikallinen-osoite
+SECRET_KEY=salainen-avain
 '''
 Seuraavaksi aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla:
 '''
