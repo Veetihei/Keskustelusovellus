@@ -4,6 +4,7 @@ from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
 import secrets
 
+#Kirjautuu sisään
 def login(username, password):
     sql = text("SELECT id, username, password, role FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username})
@@ -20,11 +21,13 @@ def login(username, password):
         else:
             return False
 
+#Kirjautuu ulos
 def logout():
     del session["username"]
     del session["role"]
     del session["user_id"]
 
+#Lisää uuden käyttäjän sovellukseen
 def register(username, password, role):
     hash_value = generate_password_hash(password)
     try:
@@ -34,6 +37,7 @@ def register(username, password, role):
     except:
         return False
     return login(username, password)
+
 
 def get_role():
     return session.get("role", 0)

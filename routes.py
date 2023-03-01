@@ -9,20 +9,20 @@ import users
 from db import db
 
 
-#TEHTY so far
+#Etusivu
 @app.route("/")
 def index():
     section_list = sections.get_sections_num()
     return render_template("index.html", sections=section_list)
 
-#TEHTY so far
+#Tietyn aihealueen sivu
 @app.route("/section/<int:id>")
 def section(id):
     section = sections.get_section(id)
     section_threads = threads.section_threads(id)
     return render_template("section.html", section=section, threads=section_threads)
 
-#TEHTY
+#Sisäänkirjautuminen
 @app.route("/login", methods=["POST"])
 def login():
     username = request.form["username"]
@@ -32,17 +32,18 @@ def login():
     else:
         return render_template("error.html", message="Väärä käyttäjätunnus tai salasana")
 
-#TEHTY
+#Uloskirjautuminen
 @app.route("/logout")
 def logout():
     users.logout()
     return redirect("/")
 
+#Ohjeet sivu
 @app.route("/instructions")
 def instructions():
     return render_template("instructions.html")
 
-#TEHTY
+#Rekisteröitymis sivu ja uuden käyttäjän luonti
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
@@ -69,7 +70,7 @@ def register():
         else:
             return render_template("error.html", message="Rekisteröinti ei onnistunut")
 
-#TEHTY
+#Hakukonesivu
 @app.route("/search", methods=["GET"])
 def search():
     query = request.args["query"]
@@ -77,13 +78,13 @@ def search():
     print(list)
     return render_template("search.html", threads=list, query=query)
 
-#TEHTY
+#Uuden ketjun luomissivu
 @app.route("/new/<int:id>")
 def new(id):
     section = sections.get_section(id)
     return render_template("new.html", section=section)
 
-#TEHTY
+#Uuden ketjun luominen
 @app.route("/create/<int:id>", methods=["POST"])
 def create(id):
     topic = request.form["topic"]
@@ -102,7 +103,7 @@ def create(id):
     else:
         return render_template("error.html", message="Viestin lähetys ei onnistunut")
 
-#TEHTY
+#Ketjuun vastaaminen
 @app.route("/answer/<int:id>", methods=["POST"])
 def answer(id):
     thread_id = request.form["thread"]
@@ -114,7 +115,7 @@ def answer(id):
     else:
         return render_template("error.html", message="Vastaaminen ei onnistunut")
 
-
+#Viestin äänestäminen
 @app.route("/vote/<int:id>", methods=["POST"])
 def vote(id):
     thread_id = request.form["thread_id"]
@@ -125,7 +126,7 @@ def vote(id):
     else:
         return redirect("/thread/"+thread_id)
 
-
+#Viestin poistaminen
 @app.route("/delete_message/<int:id>", methods=["POST"])
 def delete_message(id):
     thread_id = request.form["thread_id"]
@@ -134,13 +135,14 @@ def delete_message(id):
     else:
         return render_template("error.html", message="Vastauksen poistaminen ei onnistunut")
 
-#ABOUT THETY
+#Tietyn ketjun sivu
 @app.route("/thread/<int:id>")
 def thread(id):
     row = threads.get_thread(id)
     thread_answers = answers.get_answers_votes(id)
     return render_template("thread.html", thread=row, answers=thread_answers)
 
+#Ketjun poistaminen
 @app.route("/delete_thread/<int:id>", methods=["POST"])
 def delete_thread(id):
     section_id = request.form["section_id"]
@@ -149,7 +151,7 @@ def delete_thread(id):
     else:
         return render_template("error.html", message="Poistaminen ei onnistunut")
 
-
+#Aihealueen poistaminen
 @app.route("/remove_section/<int:id>", methods=["POST"])
 def remove_section(id):
     if sections.remove_section(id):
@@ -157,6 +159,7 @@ def remove_section(id):
     else:
         return render_template("error.html", message="Poistaminen ei onnistunut")
 
+#Uuden aihealueen luominen
 @app.route("/new_section", methods=["GET", "POST"])
 def new_section():
     if request.method == "GET":

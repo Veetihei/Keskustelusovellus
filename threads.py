@@ -3,23 +3,14 @@ from flask import session
 from sqlalchemy import text
 import users
 
-
-##EI KÄYTÖSSÄ, ANTAA KAIKKI UUSIMMAT KETJUT ETUSIVULLE
-def get_threads():
-    if session.role == 2:
-        sql = text("SELECT T.topic, T.id, T.created_at, U.name FROM ")
-    else:
-        sql = text("SELECT name, id FROM sections WHERE access = 1 ORDER BY name")
-    result = db.session.execute(sql, {"role":session.role})
-    sections = result.fetchall()
-    return sections
-
+#Hakee kaikki tietyn aihealueen ketjut
 def section_threads(id):
     sql = text("SELECT T.id, T.topic, T.created_at, T.visible, T.section_id, U.username, T.user_id FROM threads T, users U " \
         "WHERE T.user_id = U.id AND T.section_id = :id ORDER BY T.id")
     result = db.session.execute(sql, {"id":id})
     return result.fetchall()
 
+#Luo uuden ketjun
 def create(topic, message, section):
     user_id = users.user_id()
     if user_id == 0:
@@ -33,6 +24,7 @@ def create(topic, message, section):
     id = result.fetchone()
     return True, id
 
+#Hakee tietyn ketjun
 def get_thread(id):
     sql = text("SELECT T.topic, T.id, T.created_at, T.message, T.section_id, T.user_id, U.username FROM threads T, Users U " \
         "WHERE T.user_id=U.id AND T.id=:id AND T.visible=1")
@@ -40,6 +32,7 @@ def get_thread(id):
     section = result.fetchone()
     return section
 
+#Hakukone, hakee hakusanan perusteella ketjut, joissa hakusana on otsikossa
 def search(query):
     role = users.get_role()
     if role == 2:
@@ -52,6 +45,7 @@ def search(query):
     threads = result.fetchall()
     return threads
     
+#Poistaa ketjun
 def delete_thread(id):
     sql = text("SELECT user_id FROM threads WHERE id=:id")
     result = db.session.execute(sql, {"id":id})
