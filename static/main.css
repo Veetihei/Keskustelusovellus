@@ -48,7 +48,7 @@ body {
 
 .small_section {
     position: relative;
-    padding: 1em;
+    padding: 0.1em;
 }
 
 .text_left {
@@ -80,7 +80,7 @@ a:hover {
 
 .answer_meta {
     background: lightgrey;
-    padding: 1em;
+    padding: 0.1em;
     margin-bottom: 1em;
 }
 

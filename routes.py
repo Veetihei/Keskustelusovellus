@@ -98,7 +98,7 @@ def create(id):
     values = threads.create(topic, message, section)
     thread_id = str(values[1][0])
     if values[0]:
-        return redirect("/thread/"+thread_id) #MUOKKAA MENEMÄÄN KETJUUN
+        return redirect("/thread/"+thread_id)
     else:
         return render_template("error.html", message="Viestin lähetys ei onnistunut")
 
@@ -110,9 +110,21 @@ def answer(id):
     if len(answer) > 5000:
         render_template("error.html", message="Viesti on liian pitkä")
     if answers.answer(thread_id, answer):
-        return redirect("/thread/"+thread_id) #MUOKKAA MENEMÄÄN KETJUUN
+        return redirect("/thread/"+thread_id)
     else:
         return render_template("error.html", message="Vastaaminen ei onnistunut")
+
+
+@app.route("/vote/<int:id>", methods=["POST"])
+def vote(id):
+    thread_id = request.form["thread_id"]
+    vote = int(request.form["up_down"])
+    user = request.form["user_id"]
+    if answers.vote(id, vote, user):
+        return redirect("/thread/"+thread_id)
+    else:
+        return redirect("/thread/"+thread_id)
+
 
 @app.route("/delete_message/<int:id>", methods=["POST"])
 def delete_message(id):
@@ -126,7 +138,7 @@ def delete_message(id):
 @app.route("/thread/<int:id>")
 def thread(id):
     row = threads.get_thread(id)
-    thread_answers = answers.get_answers(id)
+    thread_answers = answers.get_answers_votes(id)
     return render_template("thread.html", thread=row, answers=thread_answers)
 
 @app.route("/delete_thread/<int:id>", methods=["POST"])
@@ -156,3 +168,4 @@ def new_section():
             return redirect("/")
         else:
             return render_template("error.html", message="Aihealueen lisäys ei onnistunut")
+        

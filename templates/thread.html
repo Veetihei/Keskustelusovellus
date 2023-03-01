@@ -3,8 +3,10 @@
 {% block content %}
 <div class="content">
 <h2>{{ thread.topic }}</h2>
-<p>{{ thread.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</p>
+<div class="answer_meta">
+<p><b>Lähetetty: {{ thread.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</b></p>
 <p>Aloittaja: {{ thread.username }}</p>
+</div>
 {% if session.user_id == thread.user_id or session.role == 2 %}
 
 <form action="/delete_thread/{{ thread.id }}" method="POST">
@@ -24,17 +26,38 @@
     {% for answer in answers %}
     <div class="small_section">
     <div class="answer_meta">
-    <b>Lähetetty: {{ answer.sent_at.strftime("%Y-%m-%d %H:%M:%S") }}</b> <br>
+    <p><b>Lähetetty: {{ answer.sent_at.strftime("%Y-%m-%d %H:%M:%S") }}</b></p>
     <p><i>Lähettäjä: {{ answer.username }}</i></p>
+    {% if session.user_id %}
+    <form action="/vote/{{ answer.id }}", method="POST">
+        <input type="hidden" name="thread_id" value="{{ thread.id }}">
+        <input type="hidden" name="up_down" value="1">
+        <input type="hidden" name="user_id" value="{{ session.user_id }}">
+        <input type="submit" value="upvote">
+    </form>
+    <form action="/vote/{{ answer.id }}" method="POST">
+        <input type="hidden" name="thread_id" value="{{ thread.id }}">
+        <input type="hidden" name="up_down" value="-1">
+        <input type="hidden" name="user_id" value="{{ session.user_id }}">
+        <input type="submit" value="downvote">
+    </form>
+    {% else %}
+    <br>
+    {% endif %}
+    {% if answer.sum %}
+    <p>Ääniä yhteensä: {{ answer.sum }}</p>
+    {% else %}
+    <p>Ääniä yhteensä: 0</p>
+    {% endif %}
+
     {% if session.user_id == answer.user_id or session.role == 2 %}
     <form action="/delete_message/{{ answer.id }}", method="POST" class="button_right">
         <input type="hidden" name="thread_id" value="{{ thread.id }}">
         <input type="submit" value="Poista vastaus">
     </form>
-    </div>
-    <hr>
-    {{ answer.answer }}
     {% endif %}
+    </div>
+    {{ answer.answer }}
     <hr>
     </div>
     {% endfor %}

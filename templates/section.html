@@ -16,7 +16,9 @@
 
 {% if thread.visible == 1 %}
 <div class="content">
+<div class="answer_meta">
 <a href="/thread/{{ thread.id }}" class="big_link">{{ thread.topic }}</a><br>
+</div>
 <b>Luotu: {{ thread.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</b> <br>
 <p>Lähettäjä: {{ thread.username }}</p>
 <!---KESKEN VIELÄ-->

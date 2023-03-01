@@ -23,6 +23,8 @@ def get_section(id):
     section = result.fetchone()
     return section
 
+
+
 #EI KÄYTETÄ
 def add_section(name, access):
     sql = text("INSERT INTO sections (name, access) VALUES (:name, :access)")

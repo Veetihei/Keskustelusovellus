@@ -30,6 +30,12 @@ CREATE TABLE answers (
     visible INTEGER DEFAULT 1
 );
 
+CREATE TABLE votes (
+    id SERIAL PRIMARY KEY,
+    answer_id INTEGER REFERENCES answers,
+    user_id INTEGER REFERENCES users,
+    vote INTEGER
+);
 
 
 INSERT INTO sections (name) VALUES ('Tietokoneet');
