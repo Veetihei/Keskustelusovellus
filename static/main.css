@@ -81,4 +81,10 @@ a:hover {
 .answer_meta {
     background: lightgrey;
     padding: 1em;
+    margin-bottom: 1em;
+}
+
+.answer_meta p {
+    display: inline-block;
+    vertical-align: top;
 }

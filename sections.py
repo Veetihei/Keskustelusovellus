@@ -3,8 +3,16 @@ from flask import session
 from sqlalchemy import text
 import users
 
+#POIS KÄYTÖSTÄ palauttaa aihealueet etusivulle ilman ketjujen lukumäärää
 def get_sections():
     sql = text("SELECT * FROM sections ORDER BY name")
+    result = db.session.execute(sql)
+    sections = result.fetchall()
+    return sections
+
+#Palauttaa aihealueet etusivulle ketjujen lukumäärän kanssa
+def get_sections_num():
+    sql = text("SELECT S.id, S.name, S.access, COUNT(T.id) FROM sections S LEFT JOIN threads T ON S.id = T.section_id AND T.visible = 1 GROUP BY S.id")
     result = db.session.execute(sql)
     sections = result.fetchall()
     return sections

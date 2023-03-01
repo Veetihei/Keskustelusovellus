@@ -12,7 +12,7 @@ from db import db
 #TEHTY so far
 @app.route("/")
 def index():
-    section_list = sections.get_sections()
+    section_list = sections.get_sections_num()
     return render_template("index.html", sections=section_list)
 
 #TEHTY so far
